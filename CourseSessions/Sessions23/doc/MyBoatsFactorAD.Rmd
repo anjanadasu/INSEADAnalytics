@@ -5,19 +5,17 @@
 Boats Segmentation: Factor Analysis
 ========================================================
 
-**Team names**
-
+**Anjana Dasu, Pal Grewal, Kyunghee Kim, Devina Pasta, Dan Schwarz**
 
 Business Decisions
 ---------------------------------------------------------
-your text...
-
+CreeqBoat boating company is seeking growth options in the North American market. They believe that building boats targeted toward specific types of customers will enable them to grow. Mary has been tasked with getting a better understanding of the company's current and potential customers.
 
 The Data
 --------------------------------------------------------------
+A market research firm collected various data about the boating market in the US by conducting interviews with 3,000 current and prospective boat owners.
 
-
-my text...
+Customers were asked 29 questions about their attitudes/needs/motivations around purchasing a boat. Customers responded to statements like "When buying a boat, I do a lot of shopping around and visit multiple dealers" or "Boating helps me stay active" with a number on a scale of 1 - 5, indicating how strongly they agreed or disagreed with each statement.
 
 ```{r echo=FALSE, message=FALSE, prompt=FALSE, results='asis'}
 # let's make the data into data.matrix classes so that we can easier visualize them
@@ -43,8 +41,6 @@ print(m1,'chart')
 ```
 </div>
 </div>
-<br> <br>
-
 
 Our Approach
 ---------------------------------------------------
@@ -64,7 +60,6 @@ Our Approach
 6. Save factor scores for subsequent analyses
 
 Let's follow these steps.
-
 
 The data we use here have the following descriptive statistics: 
 
@@ -86,17 +81,13 @@ print(m1,'chart')
 
 #### Step 2: Decide whether to scale or standardize the data
 
-
-your text...
+When performing the factor analysis, we looked only at question 1, which required users to respond on a standardized scale of 1-5; therefore, we did not think it was necessary to massage the data.
 
 ```{r, results='asis'}
 ProjectDatafactor_scaled=apply(ProjectDataFactor,2, function(r) {if (sd(r)!=0) res=(r-mean(r))/sd(r) else res=0*r; res})
 ```
 
 Notice now the summary statistics of the scaled dataset:
-
-<br>
-
 
 <div class="row">
 <div class="col-md-6">
@@ -115,14 +106,24 @@ print(m1,'chart')
 </div>
 </div>
 
-<br>
 As expected all variables have mean 0 and standard deviation 1. 
-
-
 
 #### Step 3:  Check correlation matrix to see if Factor Analysis makes sense
 
-your text...
+We noticed that responses to the following statements had high positive correlations, which seemed logical:
+<ul>
+<li><b>Questions 3 & 9:</b> "The brand of the boat I buy says a lot about who I am" and "I see my boat as a status symbol"</li>
+<li><b>Questions 6 & 7:</b> "Owning a boat is a way of rewarding myself for my hard work" and "Owning a boat gives me a sense of achievement"</li>
+<li><b>Questions 9 & 26:</b> "I see my boat as a status symbol" and "Having a powerful boat is what is most important to me"</li>
+<li><b>Questions 13 & 14:</b> "When buying a boat I tend to buy the latest and greatest" and "When buying accessories for my boat I tend to buy the latest and greatest"</li>
+<li><b>Questions 14 & 15:</b> "When buying accessories for my boat I tend to buy the latest and greatest" and "I am serious about the technology on my boat"</li>
+<li><b>Questions 16 & 17:</b> "People tend to come to me for advice about boating" and "I consider myself more knowledgeable about boating than the rest of my boating peers"</li>
+<li><b>Questions 16 & 20:</b> "People tend to come to me for advice about boating" and "When not on my boat I often find myself doing boating related activities"</li>
+<li><b>Questions 16 & 28:</b> "People tend to come to me for advice about boating" and "Boating is my true passion in life"</li>
+<li><b>Questions 20 & 27:</b> "When not on my boat I often find myself doing boat related activities" and "Boating is the number one thing I do with my spare time"</li>
+<li><b>Questions 20 & 28:</b> "When not on my boat I often find myself doing boat related activities" and "Boating is my true passion in life"</li>
+<li><b>Questions 27 & 28:</b> "Boating is the number one thing I do with my spare time" and "Boating is my true passion in life"</li>
+</ul>
 
 This is the correlation matrix of the `r length(factor_attributes_used)` original variable we use for factor analysis (Note: this would be the same for the standardized ones if the standardization is done as above; there is a mathematical reason for this that we will not explore - you could confirm it yourself):
 
@@ -135,13 +136,9 @@ rownames(thecor)<-colnames(ProjectDataFactor)
 cat(renderHeatmapX(thecor, border=1))
 ```
 
-your text...
-
 #### Step 4. Develop a scree plot and decide on the number of factors to be derived
 
-your text...
-
-<br>
+Based on the scree plot below and using the "elbow rule," it would appear that we should use 5 factors. However, using only 5 factors would explain about 50% of the variance, which seems quite low.
 
 ```{r echo=FALSE, comment=NA, warning=FALSE, message=FALSE,results='asis'}
 UnRotated_Results<-principal(ProjectDataFactor, nfactors=ncol(ProjectDataFactor), rotate="none",score=TRUE)
@@ -165,10 +162,6 @@ colnames(Variance_Explained_Table)<-c("Components", "Eigenvalue", "Percentage_of
 m<-gvisTable(Variance_Explained_Table,options=list(width=1200, height=min(400,27*(nrow(show_data)+1)),allowHTML=TRUE,page='disable'),formats=list(Eigenvalue="#.##",Percentage_of_explained_variance="#.##",Cumulative_percentage_of_explained_variance="#.##"))
 print(m,'chart')
 ```
-<br> <br>
-
-your text...
-
 
 ```{r Fig1, echo=FALSE, comment=NA, results='asis', message=FALSE, fig.align='center', fig=TRUE}
 
@@ -178,9 +171,6 @@ colnames(df) <- c("eigenvalues", "components", "abline")
 Line         <- gvisLineChart(as.data.frame(df), xvar="components", yvar=c("eigenvalues","abline"), options=list(title='Scree plot', legend="right", width=900, height=600, hAxis="{title:'Number of Components', titleTextStyle:{color:'black'}}", vAxes="[{title:'Eigenvalues'}]",  series="[{color:'green',pointSize:3, targetAxisIndex: 0}]"))
 print(Line, 'chart')
 ```
-
-
-your text...
 
 
 ```{r echo=FALSE, comment=NA, warning=FALSE,message=FALSE,results='asis'}
@@ -193,7 +183,7 @@ if (factor_selectionciterion == "manual")
 
 ```
 
-your text...
+Using the rotated factors matrix, we decided ultimately to use 14 factors, which would explain about 75% of the variance. Choosing 14 factors enabled us to semantically group the 29 statements in a way that we believed that was meaningful. We felt that having less than 14 factors would group statements that were not related, for example conflating brand and price, which we thought were critical to understanding our customer segments.
 
 #### 5. Interpret the factors 
 
@@ -241,15 +231,28 @@ print(m1,'chart')
 ```
 <br> <br>
 
-How would you interpret the selected factors?
+We felt that we were able to clearly describe each of the components by a particular theme or sentiment:
 
-YOUR TEXT: INTERPRETATIONS AND ARGUMENTS FOR YOUR CHOICES..
+<ol>
+<li><b>Passion:</b> Represented by #27: "Boating is the number one thing I do with my spare time	"</li>
+<li><b>Technology:</b> Represented by #13: "When buying a boat I tend to buy the latest and greatest"</li>
+<li><b>Experience:</b> Represented by #19: "Boating allows me to experience nature"</li>
+<li><b>Achievement:</b> Represented by #7: "Owning a boat gives me a sense of achievement"</li>
+<li><b>Back to Basics:</b> Represented by #2: "When buying a boat getting the lowest price is more important than the boat brand"</li>
+<li><b>Self Sufficiency:</b> Represented by #11: "I tend to perform minor boat repairs and maintenance on my own"</li>
+<li><b>Selective:</b> Represented by #1: "When buying a boat I do a lot of shopping around and visit multiple dealers"</li>
+<li><b>Brand:</b> Represented by #1: "I only consider buying a boat from a reputable brand"</li>
+<li><b>Functionality:</b> Represented by #8: "When buying a boat functionality is more important than style"</li>
+<li><b>Leveraging Expert Opinion:</b> Represented by #10: "When buying a boat I rely more on expert opinion than my own e.g. consumer reports salespeople"</li>
+<li><b>Leisure:</b> Represented by #29: "Boating is one of many things I do in my spare time"</li>
+<li><b>Social:</b> Represented by #24: "Boating gives me an outlet to socialize with family and or friends"</li>
+<li><b>Expertise:</b> Represented by #17: "I consider myself more knowledgeable about boating than the rest of my boating peers"</li>
+<li><b>Sports Performance:</b> Represented by #17: "Boating allows me to excel in the sports that I am passionate about e.g. fishing, racing, water sports"</li>
+</ol>
 
 #### Step 6. Save factor scores for subsequent analyses
 
-
 For our data, using the rotated factors we selected, we can create a new dataset where our observations are as follows (for the first `r min(max_data_report,nrow(Rotated_Results$scores))` observations):
-
 
 <div class="row">
 <div class="col-md-6">
@@ -278,10 +281,25 @@ if (factors_selected >=2){
 </div>
 <br> <br>
 
-Can you describe the observations using the new derived variables? How does each person perform for each of the selected factors?
+We have grouped our users (observations) below, based on their highest factor score. (e.g. Users 7, 13, 40 had highest factor scores on Component 9: Functionality.)
+<ol>
+<li>Users 6, 9, 17, 19, 22, 26, 30, 45</li>
+<li>Users 1-5, 14, 20, 27-28, 31-32, 35, 50</li>
+<li>User 10</li>
+<li>User 25, 34, 47</li>
+<li>User 11, 15-16, 18, 23, 38-39, 48-49</li>
+<li>User 33, 37, 43</li>
+<li>User 29, 41</li>
+<li></li>
+<li>User 7, 13, 40</li>
+<li>User 12, 21, 24, 44</li>
+<li></li>
+<li>User 8, 36</li>
+<li>User 42, 46</li>
+<li></li>
+</ol>
 
 We now can replace our original data with the new ones and continue our analysis. For example, we can now visualize our original data using only the newly derived attributes. Here is the plot when we use only the top 2 factors:
-
 
 ```{r Fig2, echo=FALSE, comment=NA, results='asis', message=FALSE, echo=FALSE, fig.align='center', fig=TRUE}
 
@@ -305,8 +323,7 @@ if(ncol(NEW_ProjectData) >= 2) {
 
 ```
 
-
 Intepretation, Decisions and Conclusion
 ----------------------------------------------------------------
 
-YOUR TEXT HERE....
+From 29 individual statements, we created 14 factors representing various sentiments around boat ownership. While this allowed us to halve the number of questions, 14 could still be considered a large number of factors. However, we believed this was necessary in order to avoid grouping unrelated questions together. We think these factors will be helpful in creating logical customer segments.
