@@ -241,13 +241,13 @@ We felt that we were able to clearly describe each of the components by a partic
 <li><b>Back to Basics:</b> Represented by #2: "When buying a boat getting the lowest price is more important than the boat brand"</li>
 <li><b>Self Sufficiency:</b> Represented by #11: "I tend to perform minor boat repairs and maintenance on my own"</li>
 <li><b>Selective:</b> Represented by #1: "When buying a boat I do a lot of shopping around and visit multiple dealers"</li>
-<li><b>Brand:</b> Represented by #1: "I only consider buying a boat from a reputable brand"</li>
+<li><b>Brand:</b> Represented by #4: "I only consider buying a boat from a reputable brand"</li>
 <li><b>Functionality:</b> Represented by #8: "When buying a boat functionality is more important than style"</li>
 <li><b>Leveraging Expert Opinion:</b> Represented by #10: "When buying a boat I rely more on expert opinion than my own e.g. consumer reports salespeople"</li>
 <li><b>Leisure:</b> Represented by #29: "Boating is one of many things I do in my spare time"</li>
 <li><b>Social:</b> Represented by #24: "Boating gives me an outlet to socialize with family and or friends"</li>
 <li><b>Expertise:</b> Represented by #17: "I consider myself more knowledgeable about boating than the rest of my boating peers"</li>
-<li><b>Sports Performance:</b> Represented by #17: "Boating allows me to excel in the sports that I am passionate about e.g. fishing, racing, water sports"</li>
+<li><b>Sports Performance:</b> Represented by #23: "Boating allows me to excel in the sports that I am passionate about e.g. fishing, racing, water sports"</li>
 </ol>
 
 #### Step 6. Save factor scores for subsequent analyses

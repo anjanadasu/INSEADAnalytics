@@ -31,7 +31,7 @@ slides_file = "Slides_s45"
 # Please ENTER then original raw attributes to use for the segmentation (the "segmentation attributes")
 # Please use numbers, not column names! e.g. c(1:5, 7, 8) uses columns 1,2,3,4,5,7,8
 # for boats possibly use: c(28,25,27,14,20,8,3,12,13,5,9,11,2,30,24), for Mall_Visits use c(2:9)
-segmentation_attributes_used = c(2, 14, 27, 17, 28, 20, 25, 24, 30, 29, 22, 21, 19, 8) 
+segmentation_attributes_used = c(28,14,20,8,3,12,2,5,9,11,30,25,18,24) 
 
 # Please ENTER then original raw attributes to use for the profiling of the segments (the "profiling attributes")
 # Please use numbers, not column names! e.g. c(1:5, 7, 8) uses columns 1,2,3,4,5,7,8
